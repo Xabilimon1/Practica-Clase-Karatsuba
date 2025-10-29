@@ -1,17 +1,20 @@
-# This is a sample Python script.
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+def karatsuba(x, y):
+    if len(str(x)) == 1 or len(str(y)) == 1:
+        return x * y
+    m = max(len(str(x)), len(str(y)))
+    m2 = m // 2
+
+    a = x // 10 ** (m2)
+    b = x % 10 ** (m2)
+    c = y // 10 ** (m2)
+    d = y % 10 ** (m2)
+
+    z0 = karatsuba(b, d)
+    z1 = karatsuba((a + b), (c + d))
+    z2 = karatsuba(a, c)
+
+    return (z2 * 10 ** (2 * m2)) + ((z1 - z2 - z0) * 10 ** (m2)) + (z0)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
-
+print(karatsuba(256, 256))
